@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ghita_Vlad_Proiect_Facturi.Migrations
 {
     [DbContext(typeof(GhitaVladProiectFacturiContext))]
-    [Migration("20260120101011_AddFacturi")]
-    partial class AddFacturi
+    [Migration("20260120151835_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,62 @@ namespace Ghita_Vlad_Proiect_Facturi.Migrations
                     b.ToTable("Parteneri");
                 });
 
+            modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Plata", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime>("DataPlatii")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FacturaID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MetodaPlata")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observatii")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<decimal>("Suma")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FacturaID");
+
+                    b.ToTable("Plati");
+                });
+
+            modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Produs", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Descriere")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("NumeProdus")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("PretUnitar")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Produse");
+                });
+
             modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Factura", b =>
                 {
                     b.HasOne("Ghita_Vlad_Proiect_Facturi.Models.Partener", "Partener")
@@ -107,6 +163,22 @@ namespace Ghita_Vlad_Proiect_Facturi.Migrations
                         .IsRequired();
 
                     b.Navigation("Partener");
+                });
+
+            modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Plata", b =>
+                {
+                    b.HasOne("Ghita_Vlad_Proiect_Facturi.Models.Factura", "Factura")
+                        .WithMany("Plati")
+                        .HasForeignKey("FacturaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Factura");
+                });
+
+            modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Factura", b =>
+                {
+                    b.Navigation("Plati");
                 });
 
             modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Partener", b =>

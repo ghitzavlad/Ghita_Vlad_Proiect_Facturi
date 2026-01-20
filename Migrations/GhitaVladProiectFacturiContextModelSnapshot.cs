@@ -63,7 +63,6 @@ namespace Ghita_Vlad_Proiect_Facturi.Migrations
                     b.ToTable("Facturi");
                 });
 
-
             modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Partener", b =>
                 {
                     b.Property<int>("ID")
@@ -95,19 +94,6 @@ namespace Ghita_Vlad_Proiect_Facturi.Migrations
 
                     b.ToTable("Parteneri");
                 });
-
-
-            modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Factura", b =>
-                {
-                    b.HasOne("Ghita_Vlad_Proiect_Facturi.Models.Partener", "Partener")
-                        .WithMany("Facturi")
-                        .HasForeignKey("PartenerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Partener");
-                });
-
 
             modelBuilder.Entity("Ghita_Vlad_Proiect_Facturi.Models.Plata", b =>
                 {
@@ -196,7 +182,6 @@ namespace Ghita_Vlad_Proiect_Facturi.Migrations
                 {
                     b.Navigation("Facturi");
                 });
-
 #pragma warning restore 612, 618
         }
     }
