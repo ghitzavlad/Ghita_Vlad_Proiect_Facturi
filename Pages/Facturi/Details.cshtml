@@ -1,0 +1,115 @@
+﻿@page
+@model Ghita_Vlad_Proiect_Facturi.Pages.Facturi.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalii factura";
+}
+
+<h1>Detalii factura</h1>
+
+<div>
+    <h4>Factura</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Serie)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Serie)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Numar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Numar)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.DataEmiterii)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.DataEmiterii)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.DataScadentei)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.DataScadentei)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.TipFactura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.TipFactura)
+        </dd>
+
+        <dt class="col-sm-2">
+            Partener
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Factura.Partener != null ? Model.Factura.Partener.Nume : "")
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Total)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Total)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Stare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Stare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.SumaPlatita)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.SumaPlatita)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.RestDePlata)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.RestDePlata)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.Factura.Plati != null && Model.Factura.Plati.Any())
+{
+    <div>
+        <h4>Plati</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Data platii</th>
+                    <th>Suma</th>
+                    <th>Metoda plata</th>
+                    <th>Observatii</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var plata in Model.Factura.Plati)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => plata.DataPlatii)</td>
+                        <td>@Html.DisplayFor(modelItem => plata.Suma)</td>
+                        <td>@Html.DisplayFor(modelItem => plata.MetodaPlata)</td>
+                        <td>@Html.DisplayFor(modelItem => plata.Observatii)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Factura.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

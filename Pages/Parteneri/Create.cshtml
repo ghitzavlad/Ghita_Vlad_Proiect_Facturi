@@ -1,0 +1,59 @@
+﻿@page
+@model Ghita_Vlad_Proiect_Facturi.Pages.Parteneri.CreateModel
+@using Ghita_Vlad_Proiect_Facturi.Models
+
+@{
+    ViewData["Title"] = "Creare Partener";
+}
+
+<h1>Create</h1>
+
+<h4>Partener</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Partener.Nume" class="control-label"></label>
+                <input asp-for="Partener.Nume" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Partener.Nume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partener.CUI" class="control-label"></label>
+                <input asp-for="Partener.CUI" class="form-control" />
+                <span asp-validation-for="Partener.CUI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partener.Adresa" class="control-label"></label>
+                <input asp-for="Partener.Adresa" class="form-control" />
+                <span asp-validation-for="Partener.Adresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partener.Email" class="control-label"></label>
+                <input asp-for="Partener.Email" class="form-control" />
+                <span asp-validation-for="Partener.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Partener.Tip" class="control-label"></label>
+                <select asp-for="Partener.Tip"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<TipPartener>()">
+                </select>
+                <span asp-validation-for="Partener.Tip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

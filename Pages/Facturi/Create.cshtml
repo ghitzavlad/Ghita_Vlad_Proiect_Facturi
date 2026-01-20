@@ -1,0 +1,84 @@
+﻿@page
+@model Ghita_Vlad_Proiect_Facturi.Pages.Facturi.CreateModel
+@using Ghita_Vlad_Proiect_Facturi.Models
+@{
+    ViewData["Title"] = "Creare factura";
+}
+
+<h1>Creare factura</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Factura.Serie" class="control-label"></label>
+                <input asp-for="Factura.Serie" class="form-control" />
+                <span asp-validation-for="Factura.Serie" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.Numar" class="control-label"></label>
+                <input asp-for="Factura.Numar" class="form-control" />
+                <span asp-validation-for="Factura.Numar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.DataEmiterii" class="control-label"></label>
+                <input asp-for="Factura.DataEmiterii" class="form-control" />
+                <span asp-validation-for="Factura.DataEmiterii" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.DataScadentei" class="control-label"></label>
+                <input asp-for="Factura.DataScadentei" class="form-control" />
+                <span asp-validation-for="Factura.DataScadentei" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.TipFactura" class="control-label"></label>
+                <select asp-for="Factura.TipFactura"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<TipFactura>()">
+                    <option value="">-- Selecteaza tipul facturii --</option>
+                </select>
+                <span asp-validation-for="Factura.TipFactura" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.PartenerID" class="control-label"></label>
+                <select asp-for="Factura.PartenerID" class="form-control" asp-items="ViewBag.PartenerID">
+                    <option value="">-- Selecteaza partener --</option>
+                </select>
+                <span asp-validation-for="Factura.PartenerID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.Total" class="control-label"></label>
+                <input asp-for="Factura.Total" class="form-control" />
+                <span asp-validation-for="Factura.Total" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.Stare" class="control-label"></label>
+                <select asp-for="Factura.Stare"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<StareFactura>()">
+                    <option value="">-- Selecteaza starea facturii --</option>
+                </select>
+                <span asp-validation-for="Factura.Stare" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-page="./Index" class="btn btn-secondary">Inapoi la lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

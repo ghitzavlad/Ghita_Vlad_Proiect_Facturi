@@ -1,0 +1,60 @@
+﻿@page
+@model Ghita_Vlad_Proiect_Facturi.Pages.Parteneri.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Nume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].CUI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Tip)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Partener) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CUI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tip)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,49 @@
+@page
+@model Ghita_Vlad_Proiect_Facturi.Pages.Plati.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Plata</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.Factura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.Factura.Serie) - @Html.DisplayFor(model => model.Plata.Factura.Numar)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.DataPlatii)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.DataPlatii)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.Suma)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.Suma)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.MetodaPlata)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.MetodaPlata)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.Observatii)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.Observatii)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Plata.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
