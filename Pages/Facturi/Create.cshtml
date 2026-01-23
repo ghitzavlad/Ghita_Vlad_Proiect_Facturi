@@ -6,7 +6,6 @@
 }
 
 <h1>Creare factura</h1>
-
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -39,9 +38,7 @@
 
             <div class="form-group">
                 <label asp-for="Factura.TipFactura" class="control-label"></label>
-                <select asp-for="Factura.TipFactura"
-                        class="form-control"
-                        asp-items="Html.GetEnumSelectList<TipFactura>()">
+                <select asp-for="Factura.TipFactura" class="form-control" asp-items="Html.GetEnumSelectList<TipFactura>()">
                     <option value="">-- Selecteaza tipul facturii --</option>
                 </select>
                 <span asp-validation-for="Factura.TipFactura" class="text-danger"></span>
@@ -56,17 +53,28 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Factura.ProdusID" class="control-label"></label>
+                <select asp-for="Factura.ProdusID" class="form-control" asp-items="ViewBag.ProduseID" id="produsSelect">
+                    <option value="">-- Selecteaza produs --</option>
+                </select>
+                <span asp-validation-for="Factura.ProdusID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.Cantitate" class="control-label"></label>
+                <input asp-for="Factura.Cantitate" class="form-control" id="cantitateInput" />
+                <span asp-validation-for="Factura.Cantitate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Factura.Total" class="control-label"></label>
-                <input asp-for="Factura.Total" class="form-control" />
-                <span asp-validation-for="Factura.Total" class="text-danger"></span>
+                <input asp-for="Factura.Total" class="form-control" id="totalInput" />
             </div>
 
             <div class="form-group">
                 <label asp-for="Factura.Stare" class="control-label"></label>
-                <select asp-for="Factura.Stare"
-                        class="form-control"
-                        asp-items="Html.GetEnumSelectList<StareFactura>()">
-                    <option value="">-- Selecteaza starea facturii --</option>
+                <select asp-for="Factura.Stare" class="form-control" asp-items="Html.GetEnumSelectList<StareFactura>()">
+                    <option value="">-- Selecteaza starea --</option>
                 </select>
                 <span asp-validation-for="Factura.Stare" class="text-danger"></span>
             </div>
@@ -81,4 +89,21 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        const produsSelect = document.getElementById('produsSelect');
+        const cantitateInput = document.getElementById('cantitateInput');
+        const totalInput = document.getElementById('totalInput');
+
+        async function calculeazaTotal() {
+            const produsId = parseInt(produsSelect.value);
+            const cantitate = parseFloat(cantitateInput.value) || 0;
+            if (!produsId) return;
+            const response = await fetch(`/Facturi/Create?handler=ProdusPret&id=${produsId}`);
+            const data = await response.json();
+            totalInput.value = (data.pret * cantitate).toFixed(2);
+        }
+
+        produsSelect.addEventListener('change', calculeazaTotal);
+        cantitateInput.addEventListener('input', calculeazaTotal);
+    </script>
 }

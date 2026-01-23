@@ -20,6 +20,8 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Facturi
 
         [BindProperty]
         public Factura Factura { get; set; } = default!;
+        public SelectList ProduseSelectList { get; set; } = default!;
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -38,6 +40,7 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Facturi
             }
 
             ViewData["PartenerID"] = new SelectList(_context.Parteneri, "ID", "Nume", Factura.PartenerID);
+            ProduseSelectList = new SelectList(_context.Produse, "ID", "NumeProdus", Factura.ProdusID);
 
             return Page();
         }
@@ -47,7 +50,14 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Facturi
             if (!ModelState.IsValid)
             {
                 ViewData["PartenerID"] = new SelectList(_context.Parteneri, "ID", "Nume", Factura.PartenerID);
+                ProduseSelectList = new SelectList(_context.Produse, "ID", "NumeProdus", Factura.ProdusID);
                 return Page();
+            }
+
+            var produs = await _context.Produse.FindAsync(Factura.ProdusID);
+            if (produs != null)
+            {
+                Factura.Total = produs.PretUnitar * Factura.Cantitate;
             }
 
             var facturaExistenta = await _context.Facturi

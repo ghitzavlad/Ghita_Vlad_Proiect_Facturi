@@ -29,6 +29,7 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Facturi
             Factura = await _context.Facturi
                 .Include(f => f.Partener)
                 .Include(f => f.Plati)
+                .Include(f => f.Produs)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Factura == null)

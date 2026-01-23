@@ -14,32 +14,43 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Plata.FacturaID" class="control-label"></label>
-                <select asp-for="Plata.FacturaID" class="form-control" asp-items="ViewBag.FacturaID" id="facturaSelect"></select>
+                <select asp-for="Plata.FacturaID" class="form-control" asp-items="Model.FacturiSelectList" id="facturaSelect"></select>
                 <span asp-validation-for="Plata.FacturaID" class="text-danger"></span>
                 <small class="form-text text-muted" id="facturaInfo"></small>
             </div>
+
             <div class="form-group">
                 <label asp-for="Plata.DataPlatii" class="control-label"></label>
                 <input asp-for="Plata.DataPlatii" class="form-control" />
                 <span asp-validation-for="Plata.DataPlatii" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Plata.Suma" class="control-label"></label>
                 <input asp-for="Plata.Suma" class="form-control" />
                 <span asp-validation-for="Plata.Suma" class="text-danger"></span>
             </div>
+
+            <div>
+                <label>Rest de plata:</label>
+                <span id="restPlata">0.00</span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Plata.MetodaPlata" class="control-label"></label>
                 <select asp-for="Plata.MetodaPlata" class="form-control" asp-items="Html.GetEnumSelectList<MetodaPlata>()"></select>
                 <span asp-validation-for="Plata.MetodaPlata" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Plata.Observatii" class="control-label"></label>
                 <input asp-for="Plata.Observatii" class="form-control" />
                 <span asp-validation-for="Plata.Observatii" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -52,7 +63,9 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         document.getElementById('facturaSelect')?.addEventListener('change', function() {
             var facturaId = this.value;
@@ -61,13 +74,18 @@
                     .then(response => response.json())
                     .then(data => {
                         var info = document.getElementById('facturaInfo');
+                        var restSpan = document.getElementById('restPlata');
                         if (data) {
                             info.textContent = `Total factura: ${data.total} | Suma platita: ${data.sumaPlatita} | Rest de plata: ${data.restDePlata}`;
-                            info.className = 'form-text text-muted';
+                            restSpan.textContent = data.restDePlata;
+                        } else {
+                            info.textContent = '';
+                            restSpan.textContent = '0.00';
                         }
                     })
                     .catch(() => {
                         document.getElementById('facturaInfo').textContent = '';
+                        document.getElementById('restPlata').textContent = '0.00';
                     });
             }
         });

@@ -1,10 +1,48 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Pagina Principala";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center my-5">
+    <h1 class="display-4">Bine ai venit in aplicatia mea de facturi!</h1>
+    <p class="lead">Gestioneaza rapid facturi, produse, parteneri si plati.</p>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-3 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title">Parteneri</h5>
+                <a asp-page="/Parteneri/Index" class="btn btn-primary mt-3">Vezi parteneri</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title">Facturi</h5>
+                <a asp-page="/Facturi/Index" class="btn btn-primary mt-3">Vezi facturi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title">Plati</h5>
+                <a asp-page="/Plati/Index" class="btn btn-primary mt-3">Vezi plati</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title">Produse</h5>
+                <a asp-page="/Produse/Index" class="btn btn-primary mt-3">Vezi produse</a>
+            </div>
+        </div>
+    </div>
 </div>

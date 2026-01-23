@@ -4,6 +4,7 @@ using Ghita_Vlad_Proiect_Facturi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ghita_Vlad_Proiect_Facturi.Migrations
 {
     [DbContext(typeof(GhitaVladProiectFacturiContext))]
-    partial class GhitaVladProiectFacturiContextModelSnapshot : ModelSnapshot
+    [Migration("20260123074236_Produs")]
+    partial class Produs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -54,6 +54,19 @@
                 <span asp-validation-for="Factura.PartenerID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Factura.ProdusID" class="control-label"></label>
+                <select asp-for="Factura.ProdusID" class="form-control" asp-items="Model.ProduseSelectList">
+                    <option value="">-- Selectează produs --</option>
+                </select>
+                <span asp-validation-for="Factura.ProdusID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Factura.Cantitate" class="control-label"></label>
+                <input asp-for="Factura.Cantitate" class="form-control" />
+                <span asp-validation-for="Factura.Cantitate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Factura.Total" class="control-label"></label>
                 <input asp-for="Factura.Total" class="form-control" />
                 <span asp-validation-for="Factura.Total" class="text-danger"></span>

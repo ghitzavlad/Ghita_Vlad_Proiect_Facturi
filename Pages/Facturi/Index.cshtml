@@ -2,77 +2,52 @@
 @model Ghita_Vlad_Proiect_Facturi.Pages.Facturi.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Facturi";
 }
 
-<h1>Index</h1>
+<h1>Facturi</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+<a asp-page="./Create" class="btn btn-success">Adauga factura noua</a>
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].Serie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].Numar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].DataEmiterii)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].DataScadentei)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].TipFactura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].Partener)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Facturi[0].Stare)
-            </th>
+            <th>Serie</th>
+            <th>Numar</th>
+            <th>Data emitere</th>
+            <th>Partener</th>
+            <th>Produs</th>
+            <th>Cantitate</th>
+            <th>Total</th>
+            <th>Stare</th>
+            <th>Suma platita</th>
+            <th>Rest de plata</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Facturi) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Serie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataEmiterii)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataScadentei)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipFactura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Partener.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stare)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var factura in Model.Facturi)
+        {
+            <tr>
+                <td>@factura.Serie</td>
+                <td>@factura.Numar</td>
+                <td>@factura.DataEmiterii.ToShortDateString()</td>
+                <td>@factura.Partener?.Nume</td>
+                <td>@factura.Produs?.NumeProdus</td>
+                <td>@factura.Cantitate</td>
+                <td>@factura.Total.ToString("C")</td>
+                <td>@factura.Stare</td>
+                <td>@factura.SumaPlatita.ToString("C")</td>
+                <td>@factura.RestDePlata.ToString("C")</td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@factura.ID" class="btn btn-sm btn-info">Detalii</a>
+                    <a asp-page="./Edit" asp-route-id="@factura.ID" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@factura.ID" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+

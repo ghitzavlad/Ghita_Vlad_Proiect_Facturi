@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,27 +18,26 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Plati
             _context = context;
         }
 
+        public SelectList FacturiSelectList { get; set; } = default!;
+
+        [BindProperty]
+        public Plata Plata { get; set; } = new Plata();
+
         public IActionResult OnGet()
         {
-            ViewData["FacturaID"] = new SelectList(_context.Facturi, "ID", "Serie");
+            FacturiSelectList = new SelectList(_context.Facturi, "ID", "Serie");
             return Page();
         }
 
         public async Task<IActionResult> OnGetFacturaInfoAsync(int? id)
         {
-            if (id == null)
-            {
-                return new JsonResult(null);
-            }
+            if (id == null) return new JsonResult(null);
 
             var factura = await _context.Facturi
                 .Include(f => f.Plati)
                 .FirstOrDefaultAsync(f => f.ID == id);
 
-            if (factura == null)
-            {
-                return new JsonResult(null);
-            }
+            if (factura == null) return new JsonResult(null);
 
             return new JsonResult(new
             {
@@ -50,30 +47,18 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Plati
             });
         }
 
-        [BindProperty]
-        public Plata Plata { get; set; } = default!;
-
         public async Task<IActionResult> OnPostAsync()
         {
             var factura = await _context.Facturi
                 .Include(f => f.Plati)
                 .FirstOrDefaultAsync(f => f.ID == Plata.FacturaID);
 
-            if (factura != null)
-            {
-                var sumaPlatitaExistenta = factura.Plati?.Sum(p => p.Suma) ?? 0m;
-                var sumaTotalaDupaPlata = sumaPlatitaExistenta + Plata.Suma;
+            if (factura == null) return NotFound();
 
-                if (sumaTotalaDupaPlata > factura.Total)
-                {
-                    ModelState.AddModelError("Plata.Suma", 
-                        $"Suma platii ({Plata.Suma:C}) plus suma deja platita ({sumaPlatitaExistenta:C}) = {sumaTotalaDupaPlata:C} depaseste totalul facturii ({factura.Total:C}). Rest de plata: {factura.Total - sumaPlatitaExistenta:C}");
-                }
-            }
-
-            if (!ModelState.IsValid)
+            if (Plata.Suma > factura.RestDePlata)
             {
-                ViewData["FacturaID"] = new SelectList(_context.Facturi, "ID", "Serie", Plata.FacturaID);
+                ModelState.AddModelError("Plata.Suma", $"Suma introdusă depășește restul de plată ({factura.RestDePlata:C}).");
+                FacturiSelectList = new SelectList(_context.Facturi, "ID", "Serie", Plata.FacturaID);
                 return Page();
             }
 

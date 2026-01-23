@@ -42,6 +42,7 @@ namespace Ghita_Vlad_Proiect_Facturi.Models
         public int PartenerID { get; set; }
         public Partener? Partener { get; set; }
 
+        [Display(Name = "Total")]
         [DataType(DataType.Currency)]
         public decimal Total { get; set; }
 
@@ -56,5 +57,10 @@ namespace Ghita_Vlad_Proiect_Facturi.Models
         [Display(Name = "Rest de plata")]
         [DataType(DataType.Currency)]
         public decimal RestDePlata => Total - SumaPlatita;
+        [Display(Name = "Produs")]
+        public int ProdusID { get; set; }
+        public Produs? Produs { get; set; }
+        public int Cantitate { get; set; } = 1;
+
     }
 }

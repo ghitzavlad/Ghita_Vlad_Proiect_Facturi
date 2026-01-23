@@ -2,13 +2,13 @@
 @model Ghita_Vlad_Proiect_Facturi.Pages.Parteneri.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista Parteneri";
 }
 
-<h1>Index</h1>
+<h1>Lista Parteneri</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="./Create" class="btn btn-success">Adauga partener nou</a>
 </p>
 <table class="table">
     <thead>
@@ -32,27 +32,28 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Partener) {
+        @foreach (var partener in Model.Partener)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nume)
+                    @Html.DisplayFor(modelItem => partener.Nume)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CUI)
+                    @Html.DisplayFor(modelItem => partener.CUI)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Adresa)
+                    @Html.DisplayFor(modelItem => partener.Adresa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => partener.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tip)
+                    @Html.DisplayFor(modelItem => partener.Tip)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-page="./Details" asp-route-id="@partener.ID" class="btn btn-sm btn-info">Detalii</a>
+                    <a asp-page="./Edit" asp-route-id="@partener.ID" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@partener.ID" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
 }

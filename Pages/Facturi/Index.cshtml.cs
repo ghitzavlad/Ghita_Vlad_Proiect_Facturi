@@ -25,6 +25,8 @@ namespace Ghita_Vlad_Proiect_Facturi.Pages.Facturi
         {
             Facturi = await _context.Facturi
                 .Include(f => f.Partener)
+                .Include(f => f.Produs)
+                .Include(f => f.Plati)
                 .ToListAsync();
         }
     }
