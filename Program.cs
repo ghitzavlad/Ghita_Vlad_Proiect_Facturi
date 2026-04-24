@@ -1,6 +1,7 @@
-﻿using Ghita_Vlad_Proiect_Facturi.Data;
+using Ghita_Vlad_Proiect_Facturi.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<GhitaVladProiectFacturiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GhitaVladProiectFacturiContext")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Ghita_Vlad_Proiect_FacturiContext>();
 
 var app = builder.Build();
 
