@@ -33,5 +33,8 @@ namespace Ghita_Vlad_Proiect_Facturi.Models
         [StringLength(500)]
         [Display(Name = "Observatii")]
         public string? Observatii { get; set; }
+
+        [Display(Name = "IBAN")]
+        public string? IBAN { get; set; }
     }
 }

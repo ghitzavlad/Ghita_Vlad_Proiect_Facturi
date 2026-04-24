@@ -6,7 +6,7 @@
     ViewData["Title"] = "Creare plata";
 }
 
-<h1>Create</h1>
+<h1>Creare plata</h1>
 
 <h4>Plata</h4>
 <hr />
@@ -49,6 +49,12 @@
                 <label asp-for="Plata.Observatii" class="control-label"></label>
                 <input asp-for="Plata.Observatii" class="form-control" />
                 <span asp-validation-for="Plata.Observatii" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Plata.IBAN" class="control-label"></label>
+                <input asp-for="Plata.IBAN" class="form-control" />
+                <span asp-validation-for="Plata.IBAN" class="text-danger"></span>
             </div>
 
             <div class="form-group">
